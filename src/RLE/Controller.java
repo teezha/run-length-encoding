@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
+
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,7 +39,9 @@ public class Controller implements Initializable {
     @FXML
     TextArea outputTextArea;
 
-    File homedir = new File("H:/var/gist/8100/mod1/");
+    //File homedir = new File("H:/var/gist/8100/mod1/");
+
+    File homedir = new File(System.getProperty("user.home"));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,61 +138,38 @@ public class Controller implements Initializable {
             byte[] inputByte = new byte[d_is.available()];
             d_is.readFully(inputByte);
             d_is.close();
-            String[] strArray = new String[255];
-            int[] intArray = new int[255];
+
             int j = 0;
-            int sum = 0;
+            int k = 0;
+            int count = 0;
+            String cat ="";
 
-            System.out.print(String.valueOf(inputByte));
-            counter.setText("d1");
-            for (int i = 0; i < inputByte[i]; i++) {
-                counter.setText("d2");
-                j = 0;
-                while ((int) inputByte[i] < 63) {
-                    //add to int
-                    if (j > 0) {
-                        sum = ((int) inputByte[i]) + j;
-                        intArray[intArray.length - 1] = ((byte) sum);
-
-                        counter.setText("d3");
-
-
-                    } else {
-
-                        intArray = new int[]{inputByte[i]};
+            for (int i =0; i < inputByte.length; i++) {
+                if (inputByte[i] > 47 && inputByte[i] <58) {
+                    j = inputByte[i] - 48;
+                    while (inputByte[i+1] >47 && inputByte[i+1] <58) {
                         i++;
-                        j = inputByte[i];
-
-                        counter.setText("d4");
+                        k = inputByte[i] -48;
+                        cat = String.valueOf(j) + String.valueOf(k);
+                        j = Integer.parseInt(cat);
                     }
-                }
-                System.out.print("array is:" + intArray);
-                if (((int) inputByte[i]) > 63) {
-                    //add to string array
-                    strArray = new String[]{String.valueOf(inputByte[i])};
+                    count = j;
+                    i++;
+                } else if ((inputByte[i] > 64 && inputByte[i] < 91)
+                        || (inputByte[i] >96 && inputByte[i] <123)
+                        && count > 0) {
+                    break;
 
-                    counter.setText("d5");
-                }
-
-
-                System.out.print("Array: " + strArray);
-            }
-            for (int i = 0; i < intArray.length; i++) {
-
-                counter.setText(String.valueOf(strArray[i]));
-                int iter = 1;
-                while (iter <= intArray[i]) {
-                    outputTextArea.appendText(strArray[i]);
-                    iter++;
-
-                    counter.setText("d7");
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+
+            } catch(IOException e){
+                e.printStackTrace();
+            }
+
         }
-
-    }
 
 
     public void setSave() throws IOException {
