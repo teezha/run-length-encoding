@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<GridPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RLE.Controller">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="200.0" minHeight="40.0" prefHeight="200.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="200.0" minHeight="40.0" prefHeight="200.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="200.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Text fx:id="greetings" strokeType="OUTSIDE" strokeWidth="0.0" text="greetings" wrappingWidth="251.6708984375" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#setLoad" prefHeight="31.0" prefWidth="59.0" text="Load" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <TextField fx:id="path" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextArea fx:id="inputTextArea" disable="true" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></TextArea>
+      <TextArea fx:id="outputTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></TextArea>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Input:" textAlignment="CENTER" wrappingWidth="175.6708984375" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Output:" textAlignment="CENTER" wrappingWidth="175.6708984375" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="File:" textAlignment="CENTER" wrappingWidth="174.6708984375" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#setSave" text="Save" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" onAction="#setEncode" text="Encode" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" onAction="#setDecode" text="Decode" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Text fx:id="counter" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="4" />
+   </children>
+</GridPane>
