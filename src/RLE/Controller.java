@@ -12,11 +12,11 @@ import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import static java.nio.charset.StandardCharsets.*;
 
 /**
  * ===========================================================
@@ -77,7 +77,7 @@ public class Controller implements Initializable {
             //wipes input and output text space
             inputTextArea.setText("");
             outputTextArea.setText("");
-            //if invlaid file selected
+            //if invalid file selected
             if (input != null) {
                 path.setText(String.valueOf(input));
             } else {
@@ -99,6 +99,8 @@ public class Controller implements Initializable {
 
 
         try {
+            //wipes the output text field to look neater
+            outputTextArea.setText("");
             //takes input file path and puts the data into input stream
             File inputFile = new File(path.getText());
             FileInputStream f_is = new FileInputStream(inputFile);
@@ -170,65 +172,43 @@ public class Controller implements Initializable {
     public void setDecode() throws IOException {
 
         try {
-            File inputFile = new File(path.getText());
-            FileInputStream f_is = new FileInputStream(inputFile);
-            DataInputStream d_is = new DataInputStream(f_is);
-            byte[] inputByte = new byte[d_is.available()];
-            d_is.readFully(inputByte);
-            d_is.close();
+            //wipes output text to look cleaner
+            outputTextArea.setText("");
+            //opens a string buffer to store the data
+            StringBuffer out = new StringBuffer();
+            //regex expression that looks for [ONE OR MORE NUMBERS] OR [LETTERS]
+            String expression = "[0-9]+|[a-zA-Z]";
+            //sets output to empty string (initialize)
+            String outputText = "";
+            // Java Pattern object regular expression compile
+            Pattern pattern = Pattern.compile(expression);
+            //sets the input text as string
+            String inputText = inputTextArea.getText();
+            // calls for the pattern object then matches the complied regex expression
+            Matcher matcher = pattern.matcher(inputText);
 
-            inputTextArea.setText(new String(inputByte));
-            String ita = inputTextArea.getText();
-            byte[] bt = ita.getBytes(StandardCharsets.US_ASCII);
+            //while the matcher can find
+            while (matcher.find()) {
 
-            int j = 0;
-            int k = 0;
-            int count = 0;
-            String cat = "";
-            String let = "";
-            String decode = "";
-
-            for (int i = 0; i < bt.length; i++) {
-                if (bt[i] > 47 && bt[i] < 58) {
-                    j = bt[i]-47;
-
-
-                    //counter.setText(String.valueOf(j));
-                    while (bt[i + 1] > 47 && bt[i + 1] < 58) {
-                        i++;
-
-                        k = bt[i] - 47;
-                        cat = String.valueOf(j) + String.valueOf(k);
-                        j = Integer.parseInt(cat);
-
-                        counter.setText(cat);
-                    }
-
-                    count = j;
-                    i++;
-                } else {//if ((inputByte[i] > 64 && inputByte[i] < 91)
-                        //|| (inputByte[i] > 96 && inputByte[i] < 123)
-                        //&& count > 0) {
-
-                    counter.setText("t4");
-                    let = new String(new byte[]{bt[i]});
-                    for (int c = 0; c < count; c++) {
-
-                        counter.setText("t5");
-                        outputTextArea.appendText(let);
-                        //decode = decode+let;
-                    }
-
-                    counter.setText("t6");
+                //sets the count to the matched number from matcher
+                int count = Integer.parseInt(matcher.group());
+                //matcher finds next (which in this case is a letter as the previous expression gorupped all the numbers)
+                matcher.find();
+                //count decreases every cycle until count is = to 0
+                while (count-- != 0) {
+                    //appends the matched letter to the string buffer
+                    out.append(matcher.group());
                 }
 
             }
-
-
-
-        } catch (IOException e) {
+            //converts the string buffer to a string
+            outputText = out.toString();
+            //writes to output area
+            outputTextArea.setText(outputText);
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+
 
     }
 
