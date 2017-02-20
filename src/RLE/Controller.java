@@ -46,9 +46,9 @@ public class Controller implements Initializable {
     TextArea outputTextArea;
 
     //At school
-    //File homedir = new File("H:/var/gist/8100/mod1/");
+    File homedir = new File("H:/var/gist/8100/mod1/");
     //At local
-    File homedir = new File(System.getProperty("user.home"));
+    //File homedir = new File(System.getProperty("user.home"));
 
 
     //initialize + title load
@@ -77,7 +77,7 @@ public class Controller implements Initializable {
             //wipes input and output text space
             inputTextArea.setText("");
             outputTextArea.setText("");
-            //if invalid file selected
+            //if invalid file selected throws invlaid file error at path bar, if not then sets path to selected file
             if (input != null) {
                 path.setText(String.valueOf(input));
             } else {
@@ -134,34 +134,9 @@ public class Controller implements Initializable {
                     j = 1;
                     currentByte = inputByte[i];
                 }
-
-                //if loop position is 2nd value from the end, follow conditions
-                if (inputByte.length - 2 == i) {
-                    //if current byte is equal to the next byte in loop
-                    if (currentByte == inputByte[i + 1]) {
-                        //letter counter add 1, prints out results
-                        j++;
-                        outputTextArea.appendText(String.valueOf(j));
-                        outputTextArea.appendText(new String(new byte[]{currentByte}));
-                        counter.setText("no2");
-                        //break out of for loop
-                        break;
-
-                    } else {
-                        //if next letter is different from the current letter, prints out last letter
-                        outputTextArea.appendText(String.valueOf(j));
-                        outputTextArea.appendText(new String(new byte[]{currentByte}));
-                        //sets reference to next letter
-                        currentByte = inputByte[i + 1];
-                        //prints out 1 and the next letter
-                        outputTextArea.appendText(String.valueOf(1));
-                        outputTextArea.appendText(new String(new byte[]{currentByte}));
-                        counter.setText("no1");
-                        //breaks out the loop
-                        break;
-                    }
-                }
             }
+            outputTextArea.appendText(String.valueOf(j));
+            outputTextArea.appendText(new String(new byte[]{currentByte}));
         } catch (IOException e) {
             e.printStackTrace();
         }
