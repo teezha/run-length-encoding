@@ -1,5 +1,4 @@
 package RLE;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
@@ -16,8 +15,6 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-
 /**
  * ===========================================================
  * mod1 Author: Toby Zhang
@@ -25,13 +22,10 @@ import java.util.regex.Pattern;
  * text files as a proof of concept example
  * ============================================================
  */
-
 public class Controller implements Initializable {
-
     /**
      * FXML hooks
      */
-
     @FXML
     Pane pane;
     @FXML
@@ -47,7 +41,7 @@ public class Controller implements Initializable {
 
     //At school
     File homedir = new File("H:/var/gist/8100/mod1/");
-    //At local
+    //At home
     //File homedir = new File(System.getProperty("user.home"));
 
 
@@ -135,6 +129,7 @@ public class Controller implements Initializable {
                     currentByte = inputByte[i];
                 }
             }
+            //prints out last item in memory from the loop
             outputTextArea.appendText(String.valueOf(j));
             outputTextArea.appendText(new String(new byte[]{currentByte}));
         } catch (IOException e) {
@@ -155,26 +150,26 @@ public class Controller implements Initializable {
             String expression = "[0-9]+|[a-zA-Z]";
             //sets output to empty string (initialize)
             String outputText = "";
-            // Java Pattern object regular expression compile
+            // Java Pattern object regular expression compiler
             Pattern pattern = Pattern.compile(expression);
             //sets the input text as string
             String inputText = inputTextArea.getText();
             // calls for the pattern object then matches the complied regex expression
             Matcher matcher = pattern.matcher(inputText);
 
-            //while the matcher can find
+            //while the matcher can find with regex
+            //This process assumes the first found character is a number and the next item found would be a letter
             while (matcher.find()) {
 
                 //sets the count to the matched number from matcher
                 int count = Integer.parseInt(matcher.group());
-                //matcher finds next (which in this case is a letter as the previous expression gorupped all the numbers)
+                //matcher finds next (which in this case is a letter as the previous expression grouped all the numbers)
                 matcher.find();
                 //count decreases every cycle until count is = to 0
                 while (count-- != 0) {
                     //appends the matched letter to the string buffer
                     out.append(matcher.group());
                 }
-
             }
             //converts the string buffer to a string
             outputText = out.toString();
