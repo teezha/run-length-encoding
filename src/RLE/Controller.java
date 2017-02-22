@@ -89,6 +89,32 @@ public class Controller implements Initializable {
     }
 
     //encode method
+
+    /**
+     * PSEDOCODE for ENCOODDDDDDE
+     *
+     *
+     * CLEAR the output textbox
+     * CREATE File object from the input path
+     * open File in Filestream
+     * open Filestream in Datastream
+     * create byte array to the size of the data stream
+     * set array equal to data stream
+     * close datastream
+     * set letter counter j to 1
+     * set current byte to the first index in the byte array (0)
+     *
+     * for i is less than the length of the byte array,
+     *      if the current byte is equal to current byte
+     *          letter counter j +1
+     *      else output the value of letter counter j and current byte letter into output text area
+     *          then set the letter counter to 1 and set the currentbyte to the byte at current i
+     *  END FOR LOOP
+     *  output current value of letter counter j and the current byte
+     *
+     *
+     *
+     */
     public void setEncode() throws IOException {
 
 
@@ -139,6 +165,24 @@ public class Controller implements Initializable {
 
     }
 
+    /**
+     * CLEAR output textbox
+     * create new string buffer
+     * create new string regex expression
+     * create new string output text
+     * create new pattern to complie regex expression
+     * create string and set as input text
+     * create matcher and searches the string for the regex pattern
+     * WHILE the matcher can find next in the string input
+     *  sets the counter to the first matched input
+     *  matcher finds next
+     *  WHILE counter is not zero
+     *      write to string buffer
+     *  END WHILE
+     *END WHILE
+     *output text is equal to string buffer to string
+     *sets output to output textbox
+     */
     public void setDecode() throws IOException {
 
         try {
