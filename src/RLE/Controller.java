@@ -20,6 +20,8 @@ import java.util.regex.Pattern;
  * mod1 Author: Toby Zhang
  * This program is designed to to do run length encoding for
  * text files as a proof of concept example
+ * Dependencies: None
+ * Limitations: Only works with encoding none numeric symbols, possible size limitations in buffer.
  * ============================================================
  */
 public class Controller implements Initializable {
@@ -40,9 +42,9 @@ public class Controller implements Initializable {
     TextArea outputTextArea;
 
     //At school
-    File homedir = new File("H:/var/gist/8100/mod1/");
+    //File homedir = new File("H:/var/gist/8100/mod1/");
     //At home
-    //File homedir = new File(System.getProperty("user.home"));
+    File homedir = new File(System.getProperty("user.home"));
 
 
     //initialize + title load
@@ -135,7 +137,6 @@ public class Controller implements Initializable {
 
             //sets the letter count to be 1
             int j = 1;
-            counter.setText(String.valueOf(inputByte[0]));
             //sets the first variable equal to the first letter
             //this sets the currentByte variable as the reference letter
             byte currentByte = inputByte[0];
@@ -246,5 +247,11 @@ public class Controller implements Initializable {
             d_os.close();
         }
     }
-}
 
+    //quick swap button
+    public  void setSwap () {
+        String swap = new String(inputTextArea.getText());
+        inputTextArea.setText(outputTextArea.getText());
+        outputTextArea.setText(swap);
+    }
+}
